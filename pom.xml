@@ -7,8 +7,10 @@
     <artifactId>przybysz-status-checker</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>przybysz-status-checker</name>
-    <description>przybysz status checker</description>
+    <description>Przybysz status checker</description>
     <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <java.version>17</java.version>
         <spring.boot.version>3.0.2</spring.boot.version>
         <spring.cloud.version>4.0.1</spring.cloud.version>

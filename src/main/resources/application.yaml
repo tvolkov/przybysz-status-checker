@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: przybysz-status-checker
+  main:
+    banner-mode: 'off'
+
+management:
+  metrics:
+    tags:
+      service: ${spring.application.name}
+  endpoint:
+    health:
+      group:
+        liveness:
+          include: ping
+        readiness:
+          include: '*'
+          exclude:
+            - vault
+          show-details: always
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 4000
+        readTimeout: 4000
+        loggerLevel: BASIC
+
+przybysz:
+  baseUrl: https://api-przybysz.duw.pl/api/v1
