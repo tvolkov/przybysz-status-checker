@@ -15,5 +15,5 @@ import java.util.Optional;
 )
 public interface PrzybyszApiClient {
     @PostMapping(path = "/token/obtain", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    Optional<PrzybyszTokenResponse> getBalanceForUser(@RequestBody ObtainTokenRequestBody obtainTokenRequestBody);
+    Optional<PrzybyszTokenResponse> authenticate(@RequestBody ObtainTokenRequestBody obtainTokenRequestBody);
 }
