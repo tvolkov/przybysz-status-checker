@@ -23,9 +23,9 @@ public class StatusService {
     private final EmailService emailService;
 
     private List<StagesResponse.Stage> applicationStages = Collections.emptyList();
-    private ThreadLocal<String> tokenThreadLocal = ThreadLocal.withInitial(() -> "");
+    private final ThreadLocal<String> tokenThreadLocal = ThreadLocal.withInitial(() -> "");
 
-    private Map<String, String> applicationStatuses = Collections.emptyMap();
+    private final Map<String, String> applicationStatuses = Collections.emptyMap();
 
     public void checkStatus() {
         getAuthToken();

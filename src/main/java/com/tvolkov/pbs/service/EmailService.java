@@ -57,7 +57,6 @@ public class EmailService {
         props.put("mail.smtp.port", properties.getSmtp().getPort());
         props.put("mail.smtp.starttls.enabled", properties.getSmtp().isStarttlsEnabled());
         props.put("mail.smtp.auth", properties.getSmtp().isAuth());
-
         return Session.getDefaultInstance(props);
     }
 }

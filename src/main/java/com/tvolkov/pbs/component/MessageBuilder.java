@@ -29,9 +29,7 @@ public class MessageBuilder {
         recipientAddresses[0] = internetAddress;
         message.setRecipients(Message.RecipientType.TO, recipientAddresses);
         message.setSubject(title, StandardCharsets.UTF_8.toString());
-
         message.setContent(body, TEXT_HTML_UTF8);
-
         return message;
     }
 }
