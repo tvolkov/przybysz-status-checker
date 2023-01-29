@@ -1,11 +1,19 @@
 package com.tvolkov.pbs.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+@Getter
+public class StagesResponse {
 
-public record StagesResponse(@JsonProperty("hydra:member") List<HydraMember> hydraMemberList) {
-    private record HydraMember(String id, String name, String synonym) {
+    private final List<Stage> stages;
+
+    @JsonCreator
+    public StagesResponse(List<Stage> stages) {
+        this.stages = stages;
     }
+    private record Stage(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("synonym") String synonym){}
 }

@@ -28,10 +28,12 @@ public class TestController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> test() {
         Optional<PrzybyszTokenResponse> authenticate = przybyszApiClient.authenticate(new ObtainTokenRequestBody("215316", "LevPanterovich!@#$5"));
-        StagesResponse stages = przybyszApiClient.getStages("Bearer " + authenticate.get().token());
+        log.info("Received token: {}", authenticate.get().token());
+
+        var stages = przybyszApiClient.getStages("Bearer " + authenticate.get().token());
         log.info("Received stages: {}", stages);
-        ApplicationsResponse applications = przybyszApiClient.getApplications("Bearer " + authenticate.get().token());
-        log.info("Received applications list: {}", applications);
-        return ResponseEntity.ok(applications);
+//        ApplicationsResponse applications = przybyszApiClient.getApplications("Bearer " + authenticate.get().token());
+//        log.info("Received applications list: {}", applications);
+        return ResponseEntity.ok(stages);
     }
 }
