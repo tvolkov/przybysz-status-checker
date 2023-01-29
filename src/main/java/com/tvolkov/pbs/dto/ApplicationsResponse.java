@@ -15,9 +15,9 @@ public class ApplicationsResponse {
         this.applications = applications;
     }
 
-    private record Application(String applicationId, String applicationStage, String applicationNumber, ClientData clientData) {
+    public record Application(String applicationId, String applicationStage, String applicationNumber, ClientData clientData) {
     }
 
-    private record ClientData(String firstName, String lastName, String email) {
+    public record ClientData(String firstName, String lastName, String email) {
     }
 }

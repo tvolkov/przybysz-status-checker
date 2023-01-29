@@ -14,5 +14,5 @@ public class StagesResponse {
     public StagesResponse(List<Stage> stages) {
         this.stages = stages;
     }
-    private record Stage(int id, String name, String synonym){}
+    public record Stage(int id, String name, String synonym){}
 }
