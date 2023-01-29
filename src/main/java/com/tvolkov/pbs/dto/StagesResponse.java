@@ -1,7 +1,6 @@
 package com.tvolkov.pbs.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.util.List;
@@ -15,5 +14,5 @@ public class StagesResponse {
     public StagesResponse(List<Stage> stages) {
         this.stages = stages;
     }
-    private record Stage(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("synonym") String synonym){}
+    private record Stage(int id, String name, String synonym){}
 }

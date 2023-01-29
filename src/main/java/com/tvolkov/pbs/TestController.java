@@ -4,7 +4,6 @@ import com.tvolkov.pbs.client.PrzybyszApiClient;
 import com.tvolkov.pbs.dto.ApplicationsResponse;
 import com.tvolkov.pbs.dto.ObtainTokenRequestBody;
 import com.tvolkov.pbs.dto.PrzybyszTokenResponse;
-import com.tvolkov.pbs.dto.StagesResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -32,8 +31,8 @@ public class TestController {
 
         var stages = przybyszApiClient.getStages("Bearer " + authenticate.get().token());
         log.info("Received stages: {}", stages);
-//        ApplicationsResponse applications = przybyszApiClient.getApplications("Bearer " + authenticate.get().token());
-//        log.info("Received applications list: {}", applications);
-        return ResponseEntity.ok(stages);
+        ApplicationsResponse applications = przybyszApiClient.getApplications("Bearer " + authenticate.get().token());
+        log.info("Received applications list: {}", applications);
+        return ResponseEntity.ok(applications);
     }
 }
