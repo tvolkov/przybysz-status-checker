@@ -1,4 +1,4 @@
-package com.tvolkov.pbs.configuration;
+package com.tvolkov.pbs.configuration.properties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 @Setter
 @Validated
 @Accessors(chain = true)
-public class Configuration {
+public class PrzybyszProperties {
     private String login;
     private String password;
 }

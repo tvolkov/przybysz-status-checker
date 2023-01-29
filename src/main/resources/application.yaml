@@ -25,7 +25,8 @@ feign:
       default:
         connectTimeout: 4000
         readTimeout: 4000
-        loggerLevel: BASIC
+        loggerLevel: full
+
 
 przybysz:
   baseUrl: https://api-przybysz.duw.pl/api/v1
