@@ -15,6 +15,7 @@
         <spring.boot.version>3.0.2</spring.boot.version>
         <spring.cloud.version>4.0.1</spring.cloud.version>
         <lombok.version>1.18.24</lombok.version>
+        <mail.version>1.6.2</mail.version>
     </properties>
     <dependencies>
         <dependency>
@@ -37,6 +38,16 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>${mail.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>${mail.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

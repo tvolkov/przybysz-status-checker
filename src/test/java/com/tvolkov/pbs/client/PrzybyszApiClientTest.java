@@ -21,6 +21,7 @@ class PrzybyszApiClientTest {
     @Autowired
     private PrzybyszApiClient przybyszApiClient;
 
+    //todo add test for applications endpoint
     @Test
     void test_get_stages() {
         WireMock.stubFor(WireMock.get(urlPathEqualTo("/dict/stages")).willReturn(aResponse()
