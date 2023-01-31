@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class StatusService {
     private List<StagesResponse.Stage> applicationStages = Collections.emptyList();
     private final ThreadLocal<String> tokenThreadLocal = ThreadLocal.withInitial(() -> "");
 
-    private final Map<String, String> applicationStatuses = Collections.emptyMap();
+    private final Map<String, String> applicationStatuses = new HashMap<>();
 
     public void checkStatus() {
         getAuthToken();
@@ -34,24 +35,36 @@ public class StatusService {
     }
 
     private void getAuthToken() {
+        log.info("Getting auth token");
         final var token = przybyszApiClient.authenticate(new ObtainTokenRequestBody(przybyszProperties.getLogin(), przybyszProperties.getPassword()))
                 .orElseThrow(() -> new RuntimeException("Unable to get auth token"))
                 .token();
+        log.info("Received auth token");
         tokenThreadLocal.set(token);// todo validate token's 'expires at'
+        log.info("Set auth token");
     }
 
     private void checkStagesPreloaded() {
+        log.info("checking pre-defined stages");
         if (applicationStages.isEmpty()) {
+            log.info("Loading stages");
             applicationStages = przybyszApiClient.getStages("Bearer " + tokenThreadLocal.get());
+            log.info("Loaded stages");
         }
     }
 
     private void updateStatuses() {
+        log.info("Querying application statuses");
         ApplicationsResponse applicationsResponse = przybyszApiClient.getApplications("Bearer " + tokenThreadLocal.get());
+        log.info("Received application statuses response");
         applicationsResponse.getApplications()
                 .forEach(application -> {
+                    log.info("Checking status for application {}", application.applicationNumber());
                     if (!applicationStatuses.getOrDefault(application.applicationNumber(), "").equalsIgnoreCase(application.applicationStage())) {
+                        log.info("application status has changed from {} to {}", applicationStatuses.get(application.applicationNumber()), application.applicationStage());
                         emailService.sendEmailNotification(application.clientData().email(), "Przybysz application status update", createEmailBody(application));
+                        log.info("Sent email");
+                        applicationStatuses.put(application.applicationNumber(), application.applicationStage());
                     }
                 });
     }

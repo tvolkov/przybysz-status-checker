@@ -27,8 +27,10 @@ public class EmailService {
 
     public void sendEmailNotification(String recipient, String title, String body) {
         Session session = createSession();
+        log.info("Created mail session {}", session);
         try {
             MimeMessage message = messageBuilder.createMessage(recipient, title, body, session);
+            log.info("Built mime message: {}", message);
             sendMessage(session, message);
         } catch (MessagingException | UnsupportedEncodingException e) {
             log.error("Email was not sent, {}.", e.getMessage());
@@ -37,6 +39,7 @@ public class EmailService {
     }
 
     private boolean sendMessage(Session session, MimeMessage message) throws MessagingException {
+        log.info("sending message");
         try (Transport transport = session.getTransport()) {
             transport.connect(properties.getSmtp().getHost(), properties.getSmtp().getUsername(), properties.getSmtp().getPassword());
             transport.sendMessage(message, message.getAllRecipients());
