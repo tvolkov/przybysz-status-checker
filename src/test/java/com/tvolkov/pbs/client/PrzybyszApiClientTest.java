@@ -23,7 +23,6 @@ class PrzybyszApiClientTest {
     @Autowired
     private PrzybyszApiClient przybyszApiClient;
 
-    //todo add test for applications endpoint
     @Test
     void test_get_stages() {
         WireMock.stubFor(WireMock.get(urlPathEqualTo("/dict/stages")).willReturn(aResponse()
@@ -35,5 +34,18 @@ class PrzybyszApiClientTest {
 
         var stages = przybyszApiClient.getStages("");
         assertEquals(16, stages.size());
+    }
+
+    @Test
+    void test_get_applications() {
+        WireMock.stubFor(WireMock.get(urlPathEqualTo("/applications/proxy")).willReturn(aResponse()
+                .withStatus(200)
+                .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                .withBody("""
+                        [{"applicationId":23002,"applicationKind":13,"applicationStage":6,"applicationStatus":3,"applicationNumber":"86820856","applicationEzdCase":"SOC-PCIII.6151.1.609.2022","applicationInspector":"Anna Shuka","applicationAcceptedAt":"2022-02-01 00:00","clientData":{"phone":"+48731218501","email":"timofey.volkov@gmail.com","lastName":"Volkov","firstName":"Timofei","dateOfBirth":"1989-05-15"}},{"applicationId":23007,"applicationKind":13,"applicationStage":6,"applicationStatus":3,"applicationNumber":"12774610","applicationEzdCase":"SOC-PCIII.6151.1.620.2022","applicationInspector":"Anna Shuka","applicationAcceptedAt":"2022-02-01 00:00","clientData":{"phone":"+48731218501","email":"timofey.volkov@gmail.com","lastName":"Volkov","firstName":"Timofei","dateOfBirth":"1989-05-15"}},{"applicationId":23005,"applicationKind":13,"applicationStage":6,"applicationStatus":3,"applicationNumber":"8418412","applicationEzdCase":"SOC-PCIII.6151.1.610.2022","applicationInspector":"Anna Shuka","applicationAcceptedAt":"2022-02-01 00:00","clientData":{"phone":"+48731218501","email":"timofey.volkov@gmail.com","lastName":"Volkov","firstName":"Timofei","dateOfBirth":"1989-05-15"}}]
+                        """)));
+
+        var applications = przybyszApiClient.getApplications("");
+        assertEquals(3, applications.size());
     }
 }

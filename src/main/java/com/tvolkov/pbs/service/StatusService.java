@@ -2,9 +2,9 @@ package com.tvolkov.pbs.service;
 
 import com.tvolkov.pbs.client.PrzybyszApiClient;
 import com.tvolkov.pbs.configuration.properties.PrzybyszProperties;
-import com.tvolkov.pbs.dto.ApplicationsResponse;
+import com.tvolkov.pbs.dto.Application;
 import com.tvolkov.pbs.dto.ObtainTokenRequestBody;
-import com.tvolkov.pbs.dto.StagesResponse;
+import com.tvolkov.pbs.dto.Stage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class StatusService {
     private final PrzybyszApiClient przybyszApiClient;
     private final EmailService emailService;
 
-    private List<StagesResponse.Stage> applicationStages = Collections.emptyList();
+    private List<Stage> applicationStages = Collections.emptyList();
     private final ThreadLocal<String> tokenThreadLocal = ThreadLocal.withInitial(() -> "");
 
     private final Map<String, String> applicationStatuses = new HashMap<>();
@@ -55,9 +55,9 @@ public class StatusService {
 
     private void updateStatuses() {
         log.info("Querying application statuses");
-        ApplicationsResponse applicationsResponse = przybyszApiClient.getApplications("Bearer " + tokenThreadLocal.get());
+        List<Application> applicationsResponse = przybyszApiClient.getApplications("Bearer " + tokenThreadLocal.get());
         log.info("Received application statuses response");
-        applicationsResponse.getApplications()
+        applicationsResponse
                 .forEach(application -> {
                     log.info("Checking status for application {}", application.applicationNumber());
                     if (!applicationStatuses.getOrDefault(application.applicationNumber(), "").equalsIgnoreCase(application.applicationStage())) {
@@ -69,7 +69,7 @@ public class StatusService {
                 });
     }
 
-    private String createEmailBody(ApplicationsResponse.Application application) {
+    private String createEmailBody(Application application) {
         return String.format("New status for application %s: %s", application.applicationNumber(), findApplicationStageName(application.applicationId()));
     }
 

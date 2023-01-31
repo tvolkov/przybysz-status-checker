@@ -1,9 +1,9 @@
 package com.tvolkov.pbs.client;
 
-import com.tvolkov.pbs.dto.ApplicationsResponse;
+import com.tvolkov.pbs.dto.Application;
 import com.tvolkov.pbs.dto.ObtainTokenRequestBody;
 import com.tvolkov.pbs.dto.PrzybyszTokenResponse;
-import com.tvolkov.pbs.dto.StagesResponse;
+import com.tvolkov.pbs.dto.Stage;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +23,8 @@ public interface PrzybyszApiClient {
     Optional<PrzybyszTokenResponse> authenticate(@RequestBody ObtainTokenRequestBody obtainTokenRequestBody);
 
     @GetMapping(path = "/dict/stages", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<StagesResponse.Stage> getStages(@RequestHeader("Authorization") String bearerToken);
+    List<Stage> getStages(@RequestHeader("Authorization") String bearerToken);
 
     @GetMapping(path = "/applications/proxy?pagination=false&status=3", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApplicationsResponse getApplications(@RequestHeader("Authorization") String bearerToken);
+    List<Application> getApplications(@RequestHeader("Authorization") String bearerToken);
 }

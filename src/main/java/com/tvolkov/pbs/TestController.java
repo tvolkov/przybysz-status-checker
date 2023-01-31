@@ -1,7 +1,6 @@
 package com.tvolkov.pbs;
 
 import com.tvolkov.pbs.client.PrzybyszApiClient;
-import com.tvolkov.pbs.dto.ApplicationsResponse;
 import com.tvolkov.pbs.dto.ObtainTokenRequestBody;
 import com.tvolkov.pbs.dto.PrzybyszTokenResponse;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +30,7 @@ public class TestController {
 
         var stages = przybyszApiClient.getStages("Bearer " + authenticate.get().token());
         log.info("Received stages: {}", stages);
-        ApplicationsResponse applications = przybyszApiClient.getApplications("Bearer " + authenticate.get().token());
+        var applications = przybyszApiClient.getApplications("Bearer " + authenticate.get().token());
         log.info("Received applications list: {}", applications);
         return ResponseEntity.ok(applications);
     }
