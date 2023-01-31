@@ -70,7 +70,7 @@ public class StatusService {
     }
 
     private String createEmailBody(Application application) {
-        return String.format("New status for application %s: %s", application.applicationNumber(), findApplicationStageName(application.applicationId()));
+        return String.format("New status for application %s: %s", application.applicationNumber(), findApplicationStageName(application.applicationStage()));
     }
 
     private String findApplicationStageName(String applicationStageId) {
