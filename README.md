@@ -1,6 +1,6 @@
 # przybysz-status-checker
 
-###Known issues:
+### Known issues:
 openjdk-17 on macOS Ventura 13.0 gives this exception when trying to make requedt to  https://api-przybysz.duw.pl/
 ```
 sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
