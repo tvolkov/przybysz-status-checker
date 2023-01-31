@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import java.util.List;
 import java.util.Optional;
 
 @FeignClient(
@@ -22,7 +23,7 @@ public interface PrzybyszApiClient {
     Optional<PrzybyszTokenResponse> authenticate(@RequestBody ObtainTokenRequestBody obtainTokenRequestBody);
 
     @GetMapping(path = "/dict/stages", produces = MediaType.APPLICATION_JSON_VALUE)
-    StagesResponse getStages(@RequestHeader("Authorization") String bearerToken);
+    List<StagesResponse.Stage> getStages(@RequestHeader("Authorization") String bearerToken);
 
     @GetMapping(path = "/applications/proxy?pagination=false&status=3", produces = MediaType.APPLICATION_JSON_VALUE)
     ApplicationsResponse getApplications(@RequestHeader("Authorization") String bearerToken);

@@ -1,0 +1,13 @@
+email:
+  smtp:
+    from: test@gmail.com
+    fromName: test
+    host: localhost
+    username: user
+    password: pass
+    starttlsEnabled: false
+    auth: false
+
+przybysz:
+  login: login
+  password: password

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -13,6 +14,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @AutoConfigureWireMock(port = 0)
 @TestPropertySource(properties = {"przybysz.baseUrl=http://localhost:${wiremock.server.port}"})
@@ -32,6 +34,6 @@ class PrzybyszApiClientTest {
                         """)));
 
         var stages = przybyszApiClient.getStages("");
-        assertEquals(16, stages.getStages().size());
+        assertEquals(16, stages.size());
     }
 }

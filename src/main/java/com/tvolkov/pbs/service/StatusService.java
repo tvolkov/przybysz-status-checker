@@ -42,7 +42,7 @@ public class StatusService {
 
     private void checkStagesPreloaded() {
         if (applicationStages.isEmpty()) {
-            applicationStages = przybyszApiClient.getStages("Bearer " + tokenThreadLocal.get()).getStages();
+            applicationStages = przybyszApiClient.getStages("Bearer " + tokenThreadLocal.get());
         }
     }
 

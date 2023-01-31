@@ -1,5 +1,6 @@
 package com.tvolkov.pbs.configuration.properties;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -14,6 +15,10 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Accessors(chain = true)
 public class PrzybyszProperties {
+
+    @NotBlank
     private String login;
+
+    @NotBlank
     private String password;
 }
