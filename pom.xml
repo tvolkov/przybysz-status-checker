@@ -79,7 +79,7 @@
     </dependencies>
 
     <build>
-        <finalName>pbs-${project.version}</finalName>
+        <finalName>pbs-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
