@@ -27,7 +27,6 @@ public class EmailProperties {
     @Setter
     public static class Smtp {
         private String from;
-        private String fromName;
 
         @NotBlank
         private String host;
@@ -38,7 +37,7 @@ public class EmailProperties {
         private String username;
         @NotBlank
         private String password;
-        private boolean starttlsEnabled;
-        private boolean auth;
+        private boolean starttlsEnabled = true;
+        private boolean auth = true;
     }
 }

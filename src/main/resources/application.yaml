@@ -30,3 +30,7 @@ feign:
 
 przybysz:
   baseUrl: https://api-przybysz.duw.pl/api/v1
+
+email:
+  smtp:
+    from: przybyszstatusbot@gmail.com

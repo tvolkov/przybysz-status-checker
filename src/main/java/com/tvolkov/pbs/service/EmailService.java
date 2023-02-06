@@ -46,7 +46,7 @@ public class EmailService {
             log.info("success send email to recipients {}", Arrays.stream(message.getAllRecipients())
                     .map(Address::toString).collect(joining(",")));
 
-            log.debug("is connected {}, stmp host {}", transport.isConnected(), properties.getSmtp().getHost());
+            log.info("is connected {}, stmp host {}", transport.isConnected(), properties.getSmtp().getHost());
             return true;
         } catch (Exception e) {
             log.error("Сannot send email, transport exception, {}.", e.getMessage());
@@ -57,6 +57,7 @@ public class EmailService {
     private Session createSession() {
         Properties props = new Properties();
         props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.host", properties.getSmtp().getHost());
         props.put("mail.smtp.port", properties.getSmtp().getPort());
         props.put("mail.smtp.starttls.enabled", properties.getSmtp().isStarttlsEnabled());
         props.put("mail.smtp.auth", properties.getSmtp().isAuth());

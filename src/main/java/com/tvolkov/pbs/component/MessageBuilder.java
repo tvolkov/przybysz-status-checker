@@ -23,7 +23,7 @@ public class MessageBuilder {
     private static final String TEXT_HTML_UTF8 = "text/html; charset=utf-8";
     public MimeMessage createMessage(String recipient, String title, String body, Session session) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(properties.getSmtp().getFrom(), properties.getSmtp().getFromName()));
+        message.setFrom(new InternetAddress(properties.getSmtp().getFrom()));
         InternetAddress[] recipientAddresses = new InternetAddress[1];
         InternetAddress internetAddress = new InternetAddress(recipient);
         recipientAddresses[0] = internetAddress;
