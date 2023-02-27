@@ -21,4 +21,6 @@ public class PrzybyszProperties {
 
     @NotBlank
     private String password;
+
+    private String interval = "PT1H";
 }

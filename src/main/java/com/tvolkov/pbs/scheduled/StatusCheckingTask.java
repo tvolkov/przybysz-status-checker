@@ -13,7 +13,7 @@ public class StatusCheckingTask {
 
     private final StatusService statusService;
 
-    @Scheduled(fixedRate = 3600000L, initialDelay = 0)
+    @Scheduled(fixedRateString = "${przybysz.interval}", initialDelay = 0)
     public void checkStatus() {
         log.info("checking status");
         statusService.checkStatus();
